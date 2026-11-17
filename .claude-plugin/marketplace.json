@@ -1,0 +1,17 @@
+{
+  "name": "silo-marketplace",
+  "owner": { "name": "Tag Agency" },
+  "metadata": {
+    "description": "Plugin interni dell'agenzia per Claude Code",
+    "version": "0.1.0"
+  },
+  "plugins": [
+    {
+      "name": "silo",
+      "source": "./plugins/silo",
+      "description": "Editor video guidato da Claude: trascrizione locale, montaggio sul parlato, timeline web, render sul Mac.",
+      "version": "0.1.0",
+      "category": "productivity"
+    }
+  ]
+}
