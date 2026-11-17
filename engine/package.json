@@ -1,0 +1,24 @@
+{
+  "name": "video-timeline-engine",
+  "version": "0.1.0",
+  "description": "Motore locale del plugin video-timeline (MCP stdio)",
+  "scripts": {
+    "typecheck": "tsc -p .",
+    "test": "bun test",
+    "build": "bun build src/index.ts --target=node --format=esm --minify --outfile=../plugins/video-timeline/server/engine.mjs",
+    "build:mac": "bun build src/index.ts --compile --minify --target=bun-darwin-arm64 --outfile=dist/vt-engine-darwin-arm64",
+    "start": "node ../plugins/video-timeline/server/engine.mjs"
+  },
+  "license": "UNLICENSED",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.32.2",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.4.4",
+    "@types/node": "^26.6.6",
+    "typescript": "^7.0.2"
+  },
+  "private": true,
+  "type": "module"
+}

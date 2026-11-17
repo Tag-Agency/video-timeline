@@ -1,0 +1,22 @@
+#!/bin/sh
+# Avvia il motore video-timeline. Preferisce l'eseguibile compilato scaricato dal setup
+# (nessun Node richiesto); altrimenti usa node o bun con il bundle engine.mjs.
+DIR="$(cd "$(dirname "$0")" && pwd)"
+DATA="${CLAUDE_PLUGIN_DATA:-$HOME/.video-timeline}"
+VER="$(cat "$DIR/VERSION" 2>/dev/null)"
+BIN="$DATA/engine/vt-engine-$VER"
+
+if [ -x "$BIN" ]; then
+  exec "$BIN" "$@"
+fi
+
+PATH="$PATH:/opt/homebrew/bin:/usr/local/bin"
+export PATH
+for rt in node bun; do
+  if command -v "$rt" >/dev/null 2>&1; then
+    exec "$rt" "$DIR/engine.mjs" "$@"
+  fi
+done
+
+echo "video-timeline: motore non installato. In Claude Code chiedi \"esegui il setup di video-timeline\" oppure lancia: sh \"$DIR/../scripts/setup.sh\"" >&2
+exit 1

@@ -1,0 +1,17 @@
+{
+  "name": "video-timeline",
+  "owner": { "name": "Tag Agency" },
+  "metadata": {
+    "description": "Plugin interni dell'agenzia per Claude Code",
+    "version": "0.1.0"
+  },
+  "plugins": [
+    {
+      "name": "video-timeline",
+      "source": "./plugins/video-timeline",
+      "description": "Editor video guidato da Claude: trascrizione locale, montaggio sul parlato, timeline web, render sul Mac.",
+      "version": "0.1.0",
+      "category": "productivity"
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "name": "video-timeline",
+  "version": "0.1.0",
+  "description": "Editor video guidato da Claude: trascrizione locale con Whisper, montaggio sul parlato, timeline web locale e render con FFmpeg sul Mac.",
+  "author": { "name": "Tag Agency" },
+  "keywords": ["video", "montaggio", "whisper", "ffmpeg", "sottotitoli"]
+}
