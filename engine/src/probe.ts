@@ -72,7 +72,7 @@ function validRate(s?: string): Rational | null {
 }
 
 export async function probe(path: string): Promise<MediaInfo> {
-  const ffprobe = requireExecutable("ffprobe", "SILO_FFPROBE");
+  const ffprobe = requireExecutable("ffprobe", "VT_FFPROBE");
   const st = await stat(path).catch(() => {
     throw new Error(`File non trovato: ${path}`);
   });

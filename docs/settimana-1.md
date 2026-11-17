@@ -7,13 +7,13 @@ Due misure decidono le scelte delle settimane successive. Vanno fatte sui Mac ve
 Su 3 girati reali (intervista pulita, audio rumoroso o più voci, uno di almeno 10 minuti):
 
 ```
-/silo:benchmark ~/Girati/intervista1.mov ~/Girati/evento.mp4 ~/Girati/podcast.wav
+/video-timeline:benchmark ~/Girati/intervista1.mov ~/Girati/evento.mp4 ~/Girati/podcast.wav
 ```
 
 oppure da terminale:
 
 ```sh
-sh ~/.claude/plugins/cache/silo-marketplace/silo/*/scripts/bench-transcribe.sh --lang it file...
+sh ~/.claude/plugins/cache/video-timeline/video-timeline/*/scripts/bench-transcribe.sh --lang it file...
 ```
 
 Da annotare per ogni Mac: modello, RTF, picco di RAM, confidenza media, errori su nomi propri.
@@ -26,7 +26,7 @@ andare in swap con Claude Code e il browser aperti.
 
 ## 2. Consumo del piano Pro
 
-Da fare appena c'è `/silo:bozza` (settimana 3); per ora si può simulare chiedendo a Claude di
+Da fare appena c'è `/video-timeline:bozza` (settimana 3); per ora si può simulare chiedendo a Claude di
 leggere un trascritto da 20 minuti e proporre i tagli.
 
 1. In Claude Code, `/usage` (o Impostazioni → Utilizzo) e annota la percentuale della finestra corrente.

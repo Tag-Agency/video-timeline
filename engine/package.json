@@ -1,13 +1,13 @@
 {
-  "name": "silo-engine",
+  "name": "video-timeline-engine",
   "version": "0.1.0",
-  "description": "Motore locale del plugin silo (MCP stdio)",
+  "description": "Motore locale del plugin video-timeline (MCP stdio)",
   "scripts": {
     "typecheck": "tsc -p .",
     "test": "bun test",
-    "build": "bun build src/index.ts --target=node --format=esm --minify --outfile=../plugins/silo/server/engine.mjs",
-    "build:mac": "bun build src/index.ts --compile --minify --target=bun-darwin-arm64 --outfile=dist/silo-engine-darwin-arm64",
-    "start": "node ../plugins/silo/server/engine.mjs"
+    "build": "bun build src/index.ts --target=node --format=esm --minify --outfile=../plugins/video-timeline/server/engine.mjs",
+    "build:mac": "bun build src/index.ts --compile --minify --target=bun-darwin-arm64 --outfile=dist/vt-engine-darwin-arm64",
+    "start": "node ../plugins/video-timeline/server/engine.mjs"
   },
   "license": "UNLICENSED",
   "dependencies": {

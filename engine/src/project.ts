@@ -1,4 +1,4 @@
-// Cartella progetto e file progetto.silo.json (schema v1).
+// Cartella progetto e file progetto.timeline.json (schema v1).
 import { createHash, randomUUID } from "node:crypto";
 import { mkdir, open, readFile, rename, writeFile, stat } from "node:fs/promises";
 import { basename, isAbsolute, join, relative, resolve } from "node:path";
@@ -6,8 +6,8 @@ import { homedir } from "node:os";
 import { probe, type MediaInfo } from "./probe.js";
 import { parseRational, type Rational } from "./rational.js";
 
-export const PROJECT_FILE = "progetto.silo.json";
-export const SCHEMA = "silo.project/1";
+export const PROJECT_FILE = "progetto.timeline.json";
+export const SCHEMA = "video-timeline.project/1";
 
 export type Format = "16:9" | "9:16" | "1:1" | "4:5";
 

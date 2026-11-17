@@ -6,15 +6,15 @@
 set -eu
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
-DATA="${CLAUDE_PLUGIN_DATA:-$HOME/.silo}"
+DATA="${CLAUDE_PLUGIN_DATA:-$HOME/.video-timeline}"
 MODELS_DIR="$DATA/models"
 PATH="/opt/homebrew/bin:/usr/local/bin:$PATH"
 export PATH
 
 LANG_CODE="it"
 MODELS="large,medium"
-OUT="$HOME/silo-benchmark-$(date +%Y%m%d-%H%M)"
-WHISPER="${SILO_WHISPER:-whisper-cli}"
+OUT="$HOME/video-timeline-benchmark-$(date +%Y%m%d-%H%M)"
+WHISPER="${VT_WHISPER:-whisper-cli}"
 
 while [ $# -gt 0 ]; do
   case "$1" in

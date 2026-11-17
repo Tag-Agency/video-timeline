@@ -10,7 +10,7 @@ async function main() {
   const server = createServer();
   await server.connect(new StdioServerTransport());
   // stdout è riservato al protocollo MCP: i log vanno su stderr.
-  console.error(`silo engine ${VERSION} pronto`);
+  console.error(`video-timeline engine ${VERSION} pronto`);
 }
 
 main().catch((e) => {

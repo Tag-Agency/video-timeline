@@ -1,4 +1,4 @@
-// Server MCP del motore silo (stdio). Settimana 1: progetto, import e probe dei media.
+// Server MCP del motore video-timeline (stdio). Settimana 1: progetto, import e probe dei media.
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { z } from "zod";
 import { probe, summarize } from "./probe.js";
@@ -60,7 +60,7 @@ export function projectSummary(op: OpenProject): string {
 }
 
 export function createServer(): McpServer {
-  const server = new McpServer({ name: "silo", version: VERSION });
+  const server = new McpServer({ name: "video-timeline", version: VERSION });
   let current: OpenProject | null = null;
 
   const requireProject = (): OpenProject => {

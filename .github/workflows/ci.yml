@@ -25,14 +25,14 @@ jobs:
         working-directory: engine
         run: |
           npm run build
-          git diff --exit-code -- ../plugins/silo/server/engine.mjs || (echo "Esegui npm run build e committa engine.mjs" && exit 1)
+          git diff --exit-code -- ../plugins/video-timeline/server/engine.mjs || (echo "Esegui npm run build e committa engine.mjs" && exit 1)
       - run: npm test
         working-directory: engine
       - name: Validazione plugin e marketplace
         run: |
           npm install -g @anthropic-ai/claude-code
           claude plugin validate .
-          claude plugin validate plugins/silo
+          claude plugin validate plugins/video-timeline
 
   release:
     if: startsWith(github.ref, 'refs/tags/v')
@@ -50,4 +50,4 @@ jobs:
       - name: Pubblica l'eseguibile per Mac
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh release create "$GITHUB_REF_NAME" engine/dist/silo-engine-darwin-arm64 --title "$GITHUB_REF_NAME" --generate-notes
+        run: gh release create "$GITHUB_REF_NAME" engine/dist/vt-engine-darwin-arm64 --title "$GITHUB_REF_NAME" --generate-notes

@@ -3,7 +3,7 @@ import { mkdtempSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 
-export function tmp(prefix = "silo-test-"): string {
+export function tmp(prefix = "vt-test-"): string {
   return mkdtempSync(join(tmpdir(), prefix));
 }
 

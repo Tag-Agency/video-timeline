@@ -7,7 +7,7 @@ import { join, resolve } from "node:path";
 import { existsSync } from "node:fs";
 import { makeClip, tmp } from "./fixtures.js";
 
-const pluginRoot = resolve(import.meta.dir, "../../plugins/silo");
+const pluginRoot = resolve(import.meta.dir, "../../plugins/video-timeline");
 const client = new Client({ name: "test", version: "0" });
 
 const text = (r: unknown) => ((r as { content: { text: string }[] }).content[0]?.text ?? "");
@@ -17,7 +17,7 @@ beforeAll(async () => {
   await client.connect(
     new StdioClientTransport({
       command: "sh",
-      args: [join(pluginRoot, "server/silo-engine")],
+      args: [join(pluginRoot, "server/vt-engine")],
       env: { ...(process.env as Record<string, string>), CLAUDE_PLUGIN_ROOT: pluginRoot, CLAUDE_PLUGIN_DATA: tmp() },
     }),
   );

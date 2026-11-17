@@ -1,5 +1,5 @@
 #!/bin/sh
-# Setup di silo su un Mac Apple Silicon. Idempotente: si può rilanciare quando serve.
+# Setup di video-timeline su un Mac Apple Silicon. Idempotente: si può rilanciare quando serve.
 #   sh setup.sh                 installa ffmpeg, whisper-cpp, modello large-v3-turbo q5_0, motore
 #   sh setup.sh --with-medium   scarica anche il modello medium (ripiego per Mac con poca RAM)
 #   sh setup.sh --check         controlla soltanto, senza installare nulla
@@ -7,11 +7,11 @@ set -eu
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 PLUGIN_ROOT="${CLAUDE_PLUGIN_ROOT:-$(dirname "$SCRIPT_DIR")}"
-DATA="${CLAUDE_PLUGIN_DATA:-$HOME/.silo}"
+DATA="${CLAUDE_PLUGIN_DATA:-$HOME/.video-timeline}"
 MODELS="$DATA/models"
 ENGINE_DIR="$DATA/engine"
 VER="$(cat "$PLUGIN_ROOT/server/VERSION")"
-REPO="${SILO_REPO:-Tag-Agency/video-timeline}"
+REPO="${VT_REPO:-Tag-Agency/video-timeline}"
 HF="https://huggingface.co/ggerganov/whisper.cpp/resolve/main"
 MODEL_LARGE="ggml-large-v3-turbo-q5_0.bin"
 MODEL_MEDIUM="ggml-medium-q5_0.bin"
@@ -33,10 +33,10 @@ warn() { printf '  ! %s\n' "$1"; }
 fail() { printf '  ✗ %s\n' "$1" >&2; exit 1; }
 have() { command -v "$1" >/dev/null 2>&1; }
 
-echo "silo $VER: setup in $DATA"
+echo "video-timeline $VER: setup in $DATA"
 
 # 1. Macchina
-if [ "$(uname -s)" != "Darwin" ]; then warn "non è macOS: proseguo, ma silo è pensato per Mac Apple Silicon"; fi
+if [ "$(uname -s)" != "Darwin" ]; then warn "non è macOS: proseguo, ma video-timeline è pensato per Mac Apple Silicon"; fi
 if [ "$(uname -m)" != "arm64" ]; then warn "processore non Apple Silicon: la trascrizione sarà lenta"; fi
 if [ "$(uname -s)" = "Darwin" ]; then
   RAM_GB=$(( $(sysctl -n hw.memsize) / 1073741824 ))
@@ -77,14 +77,14 @@ download_model "$MODEL_LARGE" 500
 [ "$WITH_MEDIUM" = 1 ] && download_model "$MODEL_MEDIUM" 480
 
 # 4. Motore: eseguibile compilato dalla release GitHub, altrimenti Node
-BIN="$ENGINE_DIR/silo-engine-$VER"
+BIN="$ENGINE_DIR/vt-engine-$VER"
 if [ -x "$BIN" ]; then
   ok "motore $VER presente"
 elif [ "$CHECK_ONLY" = 1 ]; then
   if have node || have bun; then ok "motore: userà $(have node && echo node || echo bun) con il bundle"; else warn "motore non installato"; fi
 else
   mkdir -p "$ENGINE_DIR"
-  if have gh && gh release download "v$VER" -R "$REPO" -p "silo-engine-darwin-arm64" -O "$BIN.part" --clobber >/dev/null 2>&1; then
+  if have gh && gh release download "v$VER" -R "$REPO" -p "vt-engine-darwin-arm64" -O "$BIN.part" --clobber >/dev/null 2>&1; then
     mv "$BIN.part" "$BIN"; chmod +x "$BIN"
     xattr -d com.apple.quarantine "$BIN" 2>/dev/null || true
     codesign --force -s - "$BIN" 2>/dev/null || true  # firma ad-hoc, richiesta su Apple Silicon
@@ -102,5 +102,5 @@ else
 fi
 
 echo
-sh "$PLUGIN_ROOT/server/silo-engine" --version >/dev/null 2>&1 && ok "il motore si avvia" || fail "il motore non si avvia: lancia sh \"$PLUGIN_ROOT/server/silo-engine\" --version per vedere l'errore"
-if [ "$CHECK_ONLY" = 1 ]; then echo "Controllo completato (nessuna installazione eseguita)."; else echo "Setup completato. Riavvia Claude Code se il server MCP silo risultava non connesso."; fi
+sh "$PLUGIN_ROOT/server/vt-engine" --version >/dev/null 2>&1 && ok "il motore si avvia" || fail "il motore non si avvia: lancia sh \"$PLUGIN_ROOT/server/vt-engine\" --version per vedere l'errore"
+if [ "$CHECK_ONLY" = 1 ]; then echo "Controllo completato (nessuna installazione eseguita)."; else echo "Setup completato. Riavvia Claude Code se il server MCP video-timeline risultava non connesso."; fi

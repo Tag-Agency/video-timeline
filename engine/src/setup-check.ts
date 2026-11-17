@@ -10,7 +10,7 @@ export const MODELS = {
 } as const;
 
 export function dataDir(): string {
-  return process.env.CLAUDE_PLUGIN_DATA || process.env.SILO_DATA_DIR || join(process.env.HOME ?? ".", ".silo");
+  return process.env.CLAUDE_PLUGIN_DATA || process.env.VT_DATA_DIR || join(process.env.HOME ?? ".", ".video-timeline");
 }
 
 export function modelsDir(): string {
@@ -27,9 +27,9 @@ export interface SetupReport {
 
 export function setupCheck(): SetupReport {
   const tools = {
-    ffmpeg: findExecutable("ffmpeg", "SILO_FFMPEG"),
-    ffprobe: findExecutable("ffprobe", "SILO_FFPROBE"),
-    "whisper-cli": findExecutable("whisper-cli", "SILO_WHISPER"),
+    ffmpeg: findExecutable("ffmpeg", "VT_FFMPEG"),
+    ffprobe: findExecutable("ffprobe", "VT_FFPROBE"),
+    "whisper-cli": findExecutable("whisper-cli", "VT_WHISPER"),
   };
   const models: SetupReport["models"] = {};
   for (const [k, file] of Object.entries(MODELS)) {
